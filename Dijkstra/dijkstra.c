@@ -20,8 +20,6 @@ int dijkstra(Grafo *g, CustoAresta *c){
 		dist[i]=INFINITO; 	
         pi[i]=0;
 	}
-
-        
 }
 
 
@@ -45,10 +43,9 @@ int main(){
 	imprimeGrafo(g);
 	imprimeCusto(c,e);
 
-	i = bellmanFord(g, c);
+	i = dijkstra(g, c);
 	printf("bf: %d", i);
-	
-       
+	       
 	return 0;
 
 }
