@@ -8,17 +8,17 @@ Grafo* prim(Grafo *g, int raiz){
 
 
      Grafo *AGM = (Grafo *)malloc(sizeof(Grafo));
-     AGM = criaGrafo(g->V);
+     AGM = criaGrafo(g->vertice);
 
-     int *distancia = (int*) calloc (g->V,sizeof(int));
-     int *pai = (int*) calloc (g->V,sizeof(int));
-     int *explorado = (int*) calloc (g->V,sizeof(int));
+     int *distancia = (int*) calloc (g->vertice,sizeof(int));
+     int *pai = (int*) calloc (g->vertice,sizeof(int));
+     int *explorado = (int*) calloc (g->vertice,sizeof(int));
 
      int i, menor = INFINITO, auxpai, novoVertice, flag;
 
      Vertice *verticeAdj;
 
-     for (int i = 0; i < g->V; i++) {
+     for (int i = 0; i < g->vertice; i++) {
           distancia[i] = INFINITO;
           explorado[i] = 0;
           pai[i] = -1;
@@ -27,17 +27,17 @@ Grafo* prim(Grafo *g, int raiz){
      distancia[raiz] = 0;
      pai[raiz] = 0;
 
-     int q = g->V;
+     int q = g->vertice;
 
      while(q != 0){
 
-          for (i = 0; i < g->V; i++) {
+          for (i = 0; i < g->vertice; i++) {
                flag=1;
                //o vertice ja se encontra na arvore
                if (pai[i] != -1) {
                     //exite ainda vertices adjacentes que ainda nao foram explorados
                     if (explorado[i]==0) {
-                         verticeAdj = g->adj[i].prox;
+                         verticeAdj = g->verticeAdjacente[i].prox;
                          while(verticeAdj != NULL){
                               //Verifica se o vertice adjacente ja nao esta na arvore
                               //printf("vertice: %d  verticeAdj:%d peso:%d menor %d\n", i,  verticeAdj->no, verticeAdj->peso, menor );

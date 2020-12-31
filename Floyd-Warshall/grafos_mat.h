@@ -1,8 +1,8 @@
 
 typedef struct grafo{
 
-	int V;
-	int E;
+	int vertice;
+	int aresta;
 	int **adj;
 
 }Grafo;
@@ -28,8 +28,8 @@ int **alocagrafo(int r, int c, int val){
 Grafo *criaGrafo(int V){
 
 	Grafo *G = malloc(sizeof(Grafo));
-	G->V=V;
-	G->E=0;
+	G->vertice=V;
+	G->aresta=0;
 	G->adj=alocagrafo(V,V,INFINITO);
 	
 	return G;
@@ -40,7 +40,7 @@ void insereAresta(Grafo *G, int v, int w, int peso){
 
 	if(v != w && G->adj[v][w] == 0){
 		G->adj[v][w] = peso;
-		G->E++;
+		G->aresta++;
 	}
 
 
@@ -49,7 +49,7 @@ void insereAresta(Grafo *G, int v, int w, int peso){
 void removeAresta(Grafo *G, int v, int w){
 
 	if(G->adj[v][w] == 1){
-		G-> E--;
+		G-> aresta--;
 		G->adj[v][w] = 0;
 	}
 }
@@ -57,9 +57,9 @@ void removeAresta(Grafo *G, int v, int w){
 
 void imprimiGrafo(Grafo *G){
 	int v, w;
-	for (v = 0; v< G->V; v++){
+	for (v = 0; v< G->vertice; v++){
 		printf("%2d:", v);
-		for(w = 0; w< G->V; w++){
+		for(w = 0; w< G->vertice; w++){
 			if(G->adj[v][w] >= 1)
 				printf(" %2d", w);
 		}

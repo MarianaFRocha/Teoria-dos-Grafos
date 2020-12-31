@@ -22,10 +22,10 @@ Grafo *kruskal(Grafo *g, CustoAresta *c){
 	Grafo *a = (Grafo *)malloc(sizeof(Grafo));
 
     //vetor que indica a qual conjunto cada vertice pertence
-	int *v = (int *)malloc(sizeof(int)*(g->V));
+	int *v = (int *)malloc(sizeof(int)*(g->vertice));
 
     //Cria o vetor que indica o conjunto de cada vertice
-	for (i = 0; i < g->V; ++i)
+	for (i = 0; i < g->vertice; ++i)
 	{
 		v[i]=i;
 	}
@@ -35,11 +35,11 @@ Grafo *kruskal(Grafo *g, CustoAresta *c){
     //Ordena de forma crescente o vetor de arestas de g em relacao ao peso
 //	qsort(c,  g->E, sizeof(CustoAresta), compare);
 
-	imprimeCusto(c, g->E);
+	imprimeCusto(c, g->aresta);
 
     	printf("DEBUG\n");
 
-	for (i = 0; i < g->V; ++i)
+	for (i = 0; i < g->vertice; ++i)
 	{
         	//confere se as arestas ja pertecem ao mesmo conjunto
 		if(v[c[i].v] != v[c[i].w]){

@@ -28,26 +28,26 @@ int bellmanFord(Grafo *g, CustoAresta *c){
 	for(i=0; i<g->V-1; i++)
 	{
 		printf("Interacao %d: \n", i+1);
-		for (j = 0; j < g->E; j++)
+		for (j = 0; j < g->aresta; j++)
 		{
-			if( dist[c[j].v] != INFINITO && dist[c[j].w] > (dist[c[j].v] + c[j].peso)) 
+			if( dist[c[j].verticeV] != INFINITO && dist[c[j].verticeW] > (dist[c[j].verticeV] + c[j].peso)) 
 			{
 
-				printf("v:%d w:%d  dist: %d pai:%d\n\n", c[j].v, c[j].w, (dist[c[j].v] + c[j].peso), c[j].v);
+				printf("v:%d w:%d  dist: %d pai:%d\n\n", c[j].verticeV, c[j].verticeW, (dist[c[j].verticeV] + c[j].peso), c[j].verticeV);
 
-                		dist[c[j].w] = (dist[c[j].v] + c[j].peso);
-                		pi[j]= c[j].v;	
+                		dist[c[j].verticeW] = (dist[c[j].verticeV] + c[j].peso);
+                		pi[j]= c[j].verticeV;	
 			}
 		}
 	}
 
 	printf("Vetor dist: ");
-    for(j=0; j<g->E; j++){
+    for(j=0; j<g->aresta; j++){
     		if (j<g->V)
     		{
     			printf("%d ", dist[j]);
     		}
-            if(dist[c[j].w] > (dist[c[j].v] + c[j].peso)){
+            if(dist[c[j].verticeW] > (dist[c[j].verticeV] + c[j].peso)){
                 return 1;                
             }            
         }
@@ -70,8 +70,8 @@ int main(){
 	for(i = 0; i<e; i++){
 		scanf("%d %d %d", &v, &w, &p);
 		insereAresta(g, v, w);
-		c[i].v=v;
-		c[i].w=w;
+		c[i].verticeV=v;
+		c[i].verticeW=w;
 		c[i].peso=p;
 		
 	}

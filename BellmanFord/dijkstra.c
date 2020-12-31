@@ -12,10 +12,10 @@ int dijkstra(Grafo *g, CustoAresta *c){
 
 	int i, j, v, cont=0;
 
-	int *dist = (int *)malloc(sizeof(int)*(g->V));
-	int *pi = (int *)malloc(sizeof(int)*(g->V));
+	int *dist = (int *)malloc(sizeof(int)*(g->vertice));
+	int *pi = (int *)malloc(sizeof(int)*(g->vertice));
 
-	for(i=0; i<g->V; i++){
+	for(i=0; i<g->vertice; i++){
 
 		dist[i]=INFINITO; 	
         pi[i]=0;
@@ -37,8 +37,8 @@ int main(){
 	for(i = 0; i<e; i++){
 		scanf("%d %d %d", &v, &w, &p);
 		insereAresta(g, v, w);
-		c[i].v=v;
-		c[i].w=w;
+		c[i].verticeV=v;
+		c[i].verticeW=w;
 		c[i].peso=p;
 		
 	}

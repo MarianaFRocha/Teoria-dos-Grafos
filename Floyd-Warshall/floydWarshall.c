@@ -7,14 +7,14 @@
 
 Grafo* floydWarshall(Grafo *g){
 
-	Grafo *d = criaGrafo(g->V);
-	int *pai = (int *)malloc(sizeof(int)*(g->V));
+	Grafo *d = criaGrafo(g->vertice);
+	int *pai = (int *)malloc(sizeof(int)*(g->vertice));
 
 	//int **m = malloc((g->V)* sizeof(int *));
 	
-	for (int i = 0; i < g->V; ++i)
+	for (int i = 0; i < g->vertice; ++i)
 	{
-		for (int j = 0; j < g->V; ++j)
+		for (int j = 0; j < g->vertice; ++j)
 		{
 			d->adj[i][j] = g->adj[i][j];
 		}
@@ -22,11 +22,11 @@ Grafo* floydWarshall(Grafo *g){
 	}
 
 	int k = -1, minimo = INFINITO;
-	for (int k = 0; k < g->V; ++k)
+	for (int k = 0; k < g->vertice; ++k)
 	{
-		for (int i = 0; i < g->V; ++i)
+		for (int i = 0; i < g->vertice; ++i)
 		{
-			for (int j = 0; j < g->V; ++j)
+			for (int j = 0; j < g->vertice; ++j)
 			{
 				printf("--%d %d\n", d->adj[i][j], (d->adj[i][k] + d->adj[k][j]));
 				if(d->adj[i][j]>d->adj[i][k] + d->adj[k][j]){

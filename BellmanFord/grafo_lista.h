@@ -13,24 +13,24 @@ typedef struct vertice{
 
 typedef struct grafo{
 
-	int V;
-	int E;
-	Vertice *adj;
+	int vertice;
+	int aresta;
+	Vertice *verticeAdjacente;
 
 }Grafo; 
 
 typedef struct custoAresta{
-	int v;
-	int w;
+	int verticeV;
+	int verticeW;
 	int peso;
 }CustoAresta; 
 
 Grafo *criaGrafo(int V){
 
 	Grafo *G = (Grafo *)malloc(sizeof(Grafo));
-	G->V= V;
-	G->E=0;
-	G->adj = (Vertice *)calloc(V, sizeof(Vertice));
+	G->vertice= V;
+	G->aresta=0;
+	G->verticeAdjacente = (Vertice *)calloc(V, sizeof(Vertice));
 
 	return G;
 
@@ -54,7 +54,7 @@ void insereAresta(Grafo *G, int v, int w){
 	if(v != w){
 
 		//insere em w
-		Vertice *p = G->adj[v].prox;
+		Vertice *p = G->verticeAdjacente[v].prox;
 		while(p != NULL){
 			if(p->no == w)
 				break;
@@ -63,9 +63,9 @@ void insereAresta(Grafo *G, int v, int w){
 		if(p==NULL){  //a aresta (v, w) não existe
 
 			Vertice *novo = novoVertice(w);
-			novo->prox = G->adj[v].prox;
-			G->adj[v].prox = novo;
-			G->E++;
+			novo->prox = G->verticeAdjacente[v].prox;
+			G->verticeAdjacente[v].prox = novo;
+			G->aresta++;
 
 		}
 
@@ -75,9 +75,9 @@ void insereAresta(Grafo *G, int v, int w){
 
 void removeAresta(Grafo *G, int v, int w){
 
-	if(G->adj[v].prox != NULL){
-		Vertice *aux = G->adj[v].prox;
-		Vertice *preaux = &(G->adj[v]);
+	if(G->verticeAdjacente[v].prox != NULL){
+		Vertice *aux = G->verticeAdjacente[v].prox;
+		Vertice *preaux = &(G->verticeAdjacente[v]);
 		while(aux != NULL){
 			if(aux->no == w)
 				break;
@@ -85,7 +85,7 @@ void removeAresta(Grafo *G, int v, int w){
 			aux = aux->prox;
 		}
 		if(aux != NULL){
-			G->E--;
+			G->aresta--;
 			preaux->prox = aux->prox;
 			free(aux);
 		}
@@ -99,8 +99,8 @@ void imprimeGrafo(Grafo *G){
 	int i;
 	Vertice *aux;
 	printf("\nRepresentacao do Grafo por Lista de Adjacencias\n\n");
-	for(i=0; i< G->V; i++){
-		aux= G->adj[i].prox;
+	for(i=0; i< G->vertice; i++){
+		aux= G->verticeAdjacente[i].prox;
 		printf("%d = ", i);
 		while(aux!= NULL){
 			printf("%d -> ", (aux->no));
@@ -116,7 +116,7 @@ int grauVertice(Grafo *G, int V){
 
 	int cont=0;
 	Vertice *aux;
-	aux= G->adj[V].prox;
+	aux= G->verticeAdjacente[V].prox;
 
 	while(aux!= NULL){
 		cont ++;
@@ -131,13 +131,13 @@ int grauVertice(Grafo *G, int V){
 //retorna 1 se forem iguais 
 int compararGrauGrafos(Grafo *G1, Grafo *G2){
 
-	if(G1->E != G2->E || G1->E != G2->E){
+	if(G1->aresta != G2->aresta || G1->aresta != G2->aresta){
 		return 0;
 	}
 
 	int i, v1, v2;
 
-	for (i = 0; i < G1->E; ++i)
+	for (i = 0; i < G1->aresta; ++i)
 	{
 		v1 = grauVertice(G1, i);
 		v2 = grauVertice(G2, i);
@@ -153,7 +153,7 @@ int compararGrauGrafos(Grafo *G1, Grafo *G2){
 void imprimeCusto(CustoAresta *c, int e){
 	printf("\nPeso das Arestas do Grafo\n\n");
 	for(int i=0; i<e; i++){
-		printf("v:%d - w:%d p:%d \n", (c[i].v), (c[i].w), c[i].peso);
+		printf("v:%d - w:%d p:%d \n", (c[i].verticeV), (c[i].verticeW), c[i].peso);
 	}
 
 	printf("\n");
